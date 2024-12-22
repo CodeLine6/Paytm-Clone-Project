@@ -19,7 +19,7 @@ const SUPPORTED_BANKS = [{
 
 export const AddMoney = () => {
     const [redirectUrl, setRedirectUrl] = useState(SUPPORTED_BANKS[0]?.redirectUrl);
-    const [provider, setProvider] = useState(SUPPORTED_BANKS[0].name); 
+    const [provider, setProvider] = useState(SUPPORTED_BANKS[0]?.name); 
     const amount = useRef(0);
     const {data:session}  = useSession();
     const user  = session?.user;
@@ -41,7 +41,7 @@ export const AddMoney = () => {
         }))} />
         <div className="flex justify-center pt-4">
             <Button onClick={async() => {
-                await createOnRampTransaction(amount.current * 100,provider);
+                await createOnRampTransaction(amount.current * 100,provider || "");
                 //window.location.href = redirectUrl || "";
             }}>
             Add Money
