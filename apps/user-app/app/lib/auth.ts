@@ -54,7 +54,7 @@ export const authOptions = {
     ],
     secret: process.env.JWT_SECRET || "secret",
     callbacks: {
-        async jwt({ token, user }) {
+        async jwt({ token, user } : any) {
             if (user) {
                 token.user = user
             }
