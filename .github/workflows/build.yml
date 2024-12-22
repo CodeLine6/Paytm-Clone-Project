@@ -1,0 +1,32 @@
+name : Build succeeds on PR
+
+on: 
+  pull_request:
+    branches:
+      - master
+      - main
+
+jobs:
+
+  Continuous Integration:
+
+    name: Build the project
+    runs-on: ubuntu-latest
+    steps:
+        - name: Checkout the Repository
+        - uses: actions/checkout@v3
+
+        - name: Setup Node
+        - uses: actions/setup-node@v3
+          with:
+            node-version: 20
+
+        - name: Install Dependencies
+        - run: npm install --legacy-peer-deps
+
+        - name: Generate Prisma Client
+        - run: cd packages/db && npx prisma generate && cd ../..
+
+        - name: Run Build
+        - run: npm run build
+
